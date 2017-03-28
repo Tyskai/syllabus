@@ -23,10 +23,99 @@ The archives contain highly obfuscated c and java code.
 You can compile those sources as they are, with any c language compiler. 
 
 We are going to assume, in our tests, to have both the binaries and the specifications of the programs, expressed by state machines that have been given to the tester (namely the model used for model based testing). 
-For the sake of this experiment, it is possible to use all state machines obtained from the learnlib assigment.
+It is possible to use all state machines obtained from the learnlib assigment.
 
 Assume you have a .dot file describing the model, you need to translate it into the fMBT modeling language (.aal file).
 You can do it by using one of the three python scripts located in this directory:
 
 ```
+python translate Problem10.dot Problem10.aal
+# or
+python add_knowledge Problem10.dot Problem10.aal
+# or
+python with_sut Problem10.dot Problem10.aal
 ```
+
+The difference among the three versions is:
+1) translate.py just translates the provided state machine into the fMBT format, without any connection to the System Under Test (SUT) and without any hint on how to generate test cases.
+2) add_knowledge.py will translate the provided state machine into the fMBT format, still without any connection to the SUT, and including hints which will help fMBT to not generate un-interesting test cases. It will reset the state machine if an error output has been fired. It won't generate the same invalid input again and again. It will reset the state machine sometimes, instead of generating just one very long sequence of inputs.
+3) with_sut.py does everything is done by the previous scripts. It provides connection with the sut as well.
+
+Then you have to teach fMBT you want 100% coverage of all states of your model, and that is achieved by filling the test.conf file:
+
+```
+model     = aal_remote(remote_pyaal -l "Problem10.log" "Problem10.aal")
+adapter   = aal
+heuristic = mrandom(20,lookahead(3),80,random(1234))
+coverage  = sum(usecase(['s1'](perm(1))),usecase(['s2'](perm(1))),usecase(['s2'](perm(1))),usecase(['s3'](perm(1))),usecase(['s4'](perm(1))),usecase(['s5'](perm(1))),usecase(['s5'](perm(1))),usecase(['s6'](perm(1))),usecase(['s7'](perm(1))),usecase(['s8'](perm(1))))
+pass      = coverage(inf)
+on_pass   = exit(0)
+on_fail   = exit(1)
+on_inconc = exit(2)
+```
+
+Then you can execute the tests by entering the following command:
+
+```
+fmbt -l Problem10.log Problem10.aal
+```
+
+This will generate an output such as:
+
+```
+INPUT:  5
+Expected output -> 26 Observed output -> 26
+INPUT:  1
+Expected output -> 21 Observed output -> 21
+INPUT:  5
+Expected output -> 22 Observed output -> 22
+INPUT:  5
+Expected output -> Invalid input: 5 Observed output -> Invalid input: 5
+INPUT:  4
+Expected output -> Invalid input: 4 Observed output -> Invalid input: 4
+INPUT: <RESET>
+INPUT:  2
+Expected output -> Invalid input: 2 Observed output -> Invalid input: 2
+INPUT:  3
+Expected output -> Invalid input: 3 Observed output -> Invalid input: 3
+INPUT:  4
+Expected output -> 25 Observed output -> 25
+INPUT:  1
+Expected output -> Invalid input: 1 Observed output -> Invalid input: 1
+INPUT: <RESET>
+INPUT:  5
+Expected output -> 26 Observed output -> 26
+INPUT: <RESET>
+INPUT:  2
+Expected output -> Invalid input: 2 Observed output -> Invalid input: 2
+INPUT: <RESET>
+INPUT:  3
+Expected output -> Invalid input: 3 Observed output -> Invalid input: 3
+INPUT:  1
+Expected output -> Invalid input: 1 Observed output -> Invalid input: 1
+INPUT:  4
+Expected output -> 25 Observed output -> 25
+INPUT:  5
+Expected output -> 25 Observed output -> 25
+INPUT:  3
+Expected output -> 20 Observed output -> 20
+
+...
+
+
+INPUT:  3
+Expected output -> 23 Observed output -> 23
+INPUT:  3
+Expected output -> 23 Observed output -> 23
+INPUT:  1
+Expected output -> 21ERROR 37 Observed output -> 21
+Assertion failure at adapter() of "i:1": AssertionError: 
+Traceback (most recent call last):
+  File "Problem10.wa.aal", line 223, in adapter of action "i:1"
+    assert output == outcome
+
+fail: unexpected response to input "i:1": unidentified result.
+
+```
+
+What happened here ?
