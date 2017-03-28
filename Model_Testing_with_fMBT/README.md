@@ -21,7 +21,42 @@ The RERS 2016 reachability problems - http://www.rers-challenge.org/2016/problem
 The RERS 2017 reachability training problems - http://rers-challenge.org/2017/problems/training/RERS17TrainingReachability.zip
 
 The archives contain highly obfuscated c and java code. 
-You can compile those sources as they are, with any c language compiler. 
+
+As learnlib, fMBT assumes that the SUT (software under test) is a reactive system that always produces some output for a given input. Consequently, the SUT should not crash because then fMBT will wait infinitely for the output. Make sure the RERS code is as follows:
+
+```C
+void __VERIFIER_error(int i){
+        printf("ERROR %d\n", i);
+        fflush(stdout);
+}
+```
+
+and
+
+
+```
+    errorCheck();
+
+    if( cf==1 ){
+    	fprintf(stderr, "Invalid input: %d\n", input);
+        fflush(stdout);        
+    } 
+}
+
+int main()
+{
+	// main i/o-loop
+	while (1) {
+		// read input
+		int input = 0;
+		int ret = scanf("%d", &input);
+		if (ret != 1) return 0;
+    if((input != 1) && (input != 2) && (input != 3) && (input != 4) && (input != 5)) return 0;
+		// operate eca engine
+		calculate_output(input);
+	}
+}
+```
 
 We are going to assume, in our tests, to have both the binaries and the specifications of the programs, expressed by state machines that have been given to the tester (namely the model used for model based testing). 
 It is possible to use all state machines obtained from the learnlib assigment.
@@ -101,7 +136,6 @@ INPUT:  3
 Expected output -> 20 Observed output -> 20
 
 ...
-
 
 INPUT:  3
 Expected output -> 23 Observed output -> 23
