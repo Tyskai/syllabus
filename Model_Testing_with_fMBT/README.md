@@ -47,14 +47,14 @@ Since only the third script allows the connection with the SUT, we are going to 
 Then you have to teach fMBT you want 100% coverage of all states of your model, and that is achieved by filling the test.conf file:
 
 ```
-model     = aal_remote(remote_pyaal -l "Problem10.log" "Problem10.aal")
-adapter   = aal
-heuristic = mrandom(20,lookahead(3),80,random(1234))
-coverage  = sum(usecase(['s1'](perm(1))),usecase(['s2'](perm(1))),usecase(['s2'](perm(1))),usecase(['s3'](perm(1))),usecase(['s4'](perm(1))),usecase(['s5'](perm(1))),usecase(['s5'](perm(1))),usecase(['s6'](perm(1))),usecase(['s7'](perm(1))),usecase(['s8'](perm(1))))
-pass      = coverage(inf)
-on_pass   = exit(0)
-on_fail   = exit(1)
-on_inconc = exit(2)
+model		= aal_remote(remote_pyaal -l "Problem10.log" "Problem10.aal")
+adapter		= aal
+heuristic	= mrandom(20,lookahead(3),80,random(1234))
+coverage	= sum(usecase(["s9"](perm(1))),usecase(["s8"](perm(1))),usecase(["s3"](perm(1))),usecase(["s2"](perm(1))),usecase(["s1"](perm(1))),usecase(["s0"](perm(1))),usecase(["s7"](perm(1))),usecase(["s6"](perm(1))),usecase(["s5"](perm(1))),usecase(["s4"](perm(1))),usecase(["s19"](perm(1))),usecase(["s18"](perm(1))),usecase(["s13"](perm(1))),usecase(["s12"](perm(1))),usecase(["s11"](perm(1))),usecase(["s10"](perm(1))),usecase(["s17"](perm(1))),usecase(["s16"](perm(1))),usecase(["s15"](perm(1))),usecase(["s14"](perm(1))),usecase(["s22"](perm(1))),usecase(["s20"](perm(1))),usecase(["s21"](perm(1))))
+pass		= coverage(inf)
+on_pass		= exit(0)
+on_fail		= exit(1)
+on_inconc	= exit(2)
 ```
 
 Then you execute the tests by entering the following command:
