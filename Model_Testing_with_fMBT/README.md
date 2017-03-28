@@ -39,7 +39,7 @@ python with_sut Problem10.dot Problem10.aal
 
 The difference among the three versions is:
 1) translate.py just translates the provided state machine into the fMBT format, without any connection to the System Under Test (SUT) and without any hint on how to generate test cases.
-2) add_knowledge.py will translate the provided state machine into the fMBT format, still without any connection to the SUT, and including hints which will help fMBT to not generate un-interesting test cases. It will reset the state machine if an error output has been fired. It won't generate the same invalid input again and again. It will reset the state machine sometimes, instead of generating just one very long sequence of inputs.
+2) add_knowledge.py will translate the provided state machine into the fMBT format, still without any connection to the SUT. It includes hints which will help fMBT to not generate un-interesting test cases. It will reset the state machine if an error output has been fired. It won't generate the same invalid input again and again. It will reset the state machine sometimes, instead of generating just one very long sequence of inputs.
 3) with_sut.py does everything is done by the previous scripts. It provides connection with the sut as well.
 
 Then you have to teach fMBT you want 100% coverage of all states of your model, and that is achieved by filling the test.conf file:
