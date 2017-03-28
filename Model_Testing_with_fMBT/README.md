@@ -17,6 +17,7 @@ That's all.
 Then download and unpack the RERS challenge programs:
 
 The RERS 2016 reachability problems - http://www.rers-challenge.org/2016/problems/Reachability/ReachabilityRERS2016.zip
+
 The RERS 2017 reachability training problems - http://rers-challenge.org/2017/problems/training/RERS17TrainingReachability.zip
 
 The archives contain highly obfuscated c and java code. 
