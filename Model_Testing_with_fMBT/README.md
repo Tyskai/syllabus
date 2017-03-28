@@ -27,20 +27,17 @@ We are going to assume, in our tests, to have both the binaries and the specific
 It is possible to use all state machines obtained from the learnlib assigment.
 
 Assume you have a .dot file describing the model, you need to translate it into the fMBT modeling language (.aal file).
-You can do it by using one of the three python scripts located in this directory:
+You can do it by using one of the two python scripts located in this directory:
 
 ```
-python translate Problem10.dot Problem10.aal
+python without_hints Problem10.dot Problem10.aal
 # or
-python add_knowledge Problem10.dot Problem10.aal
-# or
-python with_sut Problem10.dot Problem10.aal
+python with_hints Problem10.dot Problem10.aal
 ```
 
-The difference among the three versions is:
-1) translate.py just translates the provided state machine into the fMBT format, without any connection to the System Under Test (SUT) and without any hint on how to generate test cases.
-2) add_knowledge.py will translate the provided state machine into the fMBT format, still without any connection to the SUT. It includes hints which will help fMBT to not generate un-interesting test cases. It will reset the state machine if an error output has been fired. It won't generate the same invalid input again and again. It will reset the state machine sometimes, instead of generating just one very long sequence of inputs.
-3) with_sut.py does everything is done by the previous scripts. It provides connection with the sut as well.
+The difference between them is the following:
+1) without_hints.py just translates the provided state machine into the fMBT format without any hint on how to generate test cases.
+2) with_hints.py will translate the provided state machine into the fMBT format. It includes hints which will help fMBT to not generate un-interesting test cases. It will reset the state machine if an error output has been fired. It won't generate the same invalid input again and again. It will reset the state machine sometimes, instead of generating just one very long sequence of inputs.
 You can run all of them and see the differences in the generated .aal file. 
 Since only the third script allows the connection with the SUT, we are going to use it to get the test executed. 
 
