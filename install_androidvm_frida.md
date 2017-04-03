@@ -1,8 +1,8 @@
 STEP 1: Installing Androlab VM
  
-1.       Install VirtualBox
-2.       Download androlab VM image from here: https://github.com/sh4hin/Androl4b
-3.       Launch the image in VirtualBox by opening  the andro.vbox file just downloaded and pressing “Start”.
+1. Install VirtualBox
+2. Download androlab VM image from here: https://github.com/sh4hin/Androl4b
+3. Launch the image in VirtualBox by opening  the andro.vbox file just downloaded and pressing “Start”.
  
 As indicated in the github page, the login/password combination is andro/androlab .
  
@@ -11,8 +11,11 @@ STEP 2: Downloading Android 4.4.2 and creating emulator
 Open a console and run android . You’ll get into the SDK Manager.
  
 Find and select the following packages under Android 4.4.2 (API 19):
-·         SDK platform
-·         ARM EABI v7a System Image
+
+```
+    SDK platform
+    ARM EABI v7a System Image
+```
  
 Then click Install, accept the licenses and wait for the download to finish. If you have trouble finding the ARM EABI system image, you may need to first install the SDK platform, then close the SDK manager and run it again.
  
