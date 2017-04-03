@@ -18,7 +18,7 @@ Then click Install, accept the licenses and wait for the download to finish. If 
  
 After both these packages are installed, go the Tools menu and select “Manage AVDs”, press “Create…” and select the following settings:
  
-cid:image003.jpg@01D2ABBD.56123C50
+![](image003.jpg)
  
 Press OK, and OK again in the final dialog.
  
@@ -30,7 +30,7 @@ After this, you should be able to load the emulator by running the following com
 
 Note that this is expected to take some time to boot. You should immediately see an emulator window with Android written in it. Once it’s finished booting you should see an emulated Android device as shown here:
  
-cid:image004.jpg@01D2ABBD.56123C50
+![](image004.jpg)
  
 STEP 3: Installing Frida
  
