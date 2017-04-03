@@ -24,8 +24,10 @@ Press OK, and OK again in the final dialog.
  
 After this, you should be able to load the emulator by running the following command in a console:
  
+```
 /home/andro/Android/Sdk/tools/emulator -avd lab2
- 
+```
+
 Note that this is expected to take some time to boot. You should immediately see an emulator window with Android written in it. Once it’s finished booting you should see an emulated Android device as shown here:
  
 cid:image004.jpg@01D2ABBD.56123C50
@@ -34,12 +36,16 @@ STEP 3: Installing Frida
  
 From a console, run the following command:
  
+```
 sudo pip install frida
- 
+```
+
 After this, try running frida --version to verify that it was correctly installed:
  
+```
 andro@lab:/tmp/test/APK % frida --version
 9.1.25
 andro@lab:/tmp/test/APK %
- 
+```
+
 And we’re done
