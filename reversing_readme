@@ -1,0 +1,37 @@
+* Download and extract zip file
+
+wget https://www.limited-entropy.com/stuff/TUD_april17.zip && unzip TUD_april17.zip
+
+* Launching emulator
+
+/home/andro/Android/Sdk/tools/emulator -avd lab2
+
+* Installing APKs
+
+adb install -r example.apk
+
+* Installing zipalign
+
+sudo apt-get install zipalign
+
+* Keystore generation
+
+keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+
+* Installing and launching frida server
+
+cd zip/frida
+adb push frida-server-9.1.25-android-arm /data/local/tmp/frida-server
+adb shell chmod 777 /data/local/tmp/frida-server
+adb shell /data/local/tmp/frida-server
+
+* Testing frida server
+
+frida-ps -U
+
+
+* Lauching frida example script
+
+1.- Launch "Exercise1" application on the emulator
+2.- Run python exercise1.py com.riscure.exercise1
+
